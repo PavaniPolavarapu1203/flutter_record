@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flutter Record</title>
+    <link rel="stylesheet" href="style.css">    
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="topbar">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <span class="icon" id="themeIcon">☾</span>
+    </button>
+    <h1>FLUTTER RECORD</h1>
+    <div class="profile">
+      <div>
+        <strong>Pavani Polavarapu</strong><br />
+        <small>PIN: 248W5A1203</small>
+      </div>
+      <img src="/images/PROFILES.jpeg" alt="Profile" />
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3>Topics</h3>
+
+    <div class="menu-item">
+      <button onclick="toggleMenu('t1')">1. Introduction</button>
+      <div class="submenu" id="t1">
+        <a href="#" onclick="loadContent('q1'); return false;">What is Flutter?</a>
+        <a href="#" onclick="loadContent('q2'); return false;">Key Features</a>
+        <a href="#" onclick="loadContent('q3'); return false;">What is Dart?</a>
+        <a href="#" onclick="loadContent('q4'); return false;">Advantages</a>
+        <a href="#" onclick="loadContent('q5'); return false;">Android Studio in Flutter</a>
+        <a href="#" onclick="loadContent('q6'); return false;">Installing Flutter</a>
+        <a href="#" onclick="loadContent('q7'); return false;">Flutter vs React Native</a>
+        <a href="#" onclick="loadContent('q8'); return false;">Web vs Mobile Applications</a>
+        <a href="#" onclick="loadContent('q9'); return false;">Emulator vs Simulator</a>
+        <a href="#" onclick="loadContent('q10'); return false;">Flutter Development Tools</a>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <button onclick="toggleMenu('t2')">2. Flutter Installation</button>
+      <div class="submenu" id="t2">
+        <a href="#" onclick="loadContent('ch2_unix'); return false;">Unix / Linux</a>
+        <a href="#" onclick="loadContent('ch2_windows'); return false;">Windows</a>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <button onclick="toggleMenu('t3')">3. Android Studio</button>
+      <div class="submenu" id="t3">
+        <a href="#" onclick="loadContent('ch3_linux'); return false;">Linux</a>
+        <a href="#" onclick="loadContent('ch3_windows'); return false;">Windows</a>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <button onclick="toggleMenu('t4')">4. Containers</button>
+      <div class="submenu" id="t4">
+        <a href="#" onclick="loadContent('ch4_text_container'); return false;">Text Container</a>
+        <a href="#" onclick="loadContent('ch4_image_container'); return false;">Image Container</a>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <button onclick="toggleMenu('t5')">5. Layout Widgets</button>
+      <div class="submenu" id="t5">
+        <a href="#" onclick="loadContent('ch5_row'); return false;">Row</a>
+        <a href="#" onclick="loadContent('ch5_column'); return false;">Column</a>
+        <a href="#" onclick="loadContent('ch5_stack'); return false;">Stack</a>
+        <a href="#" onclick="loadContent('ch5_combined'); return false;">Combination</a>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <button onclick="toggleMenu('t6')">6. Custom Widgets</button>
+      <div class="submenu" id="t6">
+        <a href="#" onclick="loadContent('ch6_reusable'); return false;">Reusable Widget</a>
+        <a href="#" onclick="loadContent('ch6_theme'); return false;">Themes</a>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <button onclick="toggleMenu('t7')">7. Forms</button>
+      <div class="submenu" id="t7">
+        <a href="#" onclick="loadContent('ch7_fields'); return false;">Form Fields</a>
+        <a href="#" onclick="loadContent('ch7_validation'); return false;">Validations</a>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <button onclick="toggleMenu('t8')">8. Animations</button>
+      <div class="submenu" id="t8">
+        <a href="#" onclick="loadContent('ch8_animations'); return false;">Animations Demo</a>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <button onclick="toggleMenu('t9')">9. UI Components</button>
+      <div class="submenu" id="t9">
+        <a href="#" onclick="loadContent('ch9_login'); return false;">Login Page</a>
+        <a href="#" onclick="loadContent('ch9_profile'); return false;">Profile Card</a>
+        <a href="#" onclick="loadContent('ch9_allwidgets'); return false;">All Widgets</a>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <button onclick="toggleMenu('t10')">10. API Integration</button>
+      <div class="submenu" id="t10">
+        <a href="#" onclick="loadContent('ch10_api'); return false;">REST API</a>
+      </div>
+    </div>
+    <div class="menu-item">
+      <button onclick="toggleMenu('t11')">11. Navigation</button>
+      <div class="submenu" id="t11">
+        <a href="#" onclick="loadContent('ch11_basic'); return false;">Basic Navigation</a>
+      </div>
+    </div>
+  </div> <!-- End of Sidebar -->
+
+  <!-- Main Content Area -->
+  <div class="content" id="mainContent">
+    <h2>Welcome to Flutter Record</h2>
+    <p>
+      Select a topic from the left navigation to view detailed notes, code snippets,
+      and experiment records related to Flutter development.
+    </p>
+  </div>
+
+  <!-- JavaScript at the end -->
+  <script>
+    function toggleMenu(id) {
+      const menu = document.getElementById(id);
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+      const isLight = document.body.classList.contains('light');
+      document.getElementById('themeIcon').textContent = isLight ? '☀︎' : '☾';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    }
+
+    // Restore saved theme
+    (function () {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light');
+        document.getElementById('themeIcon').textContent = '☀︎';
+      }
+    })();
+
+    // MAIN CONTENT LOADER
+    function loadContent(topic) {
+      const content = document.getElementById('mainContent');
+
+      const data = {
+        q1: `
+          <h2>1. What is Flutter?</h2>
+          <p>Flutter is an open-source UI software development kit developed by Google.</p>
+          <ul>
+            <li>Develops mobile, web, and desktop apps</li>
+            <li>Single codebase</li>
+            <li>High performance</li>
+          </ul>
+        `,
+        // ... (all your other content entries - same as before)
+        // I've kept the rest exactly as you provided to avoid repetition
+        q2: `
+          <h2>2. Key Features of Flutter</h2>
+          <ul>
+            <li>Single Codebase</li>
+            <li>Hot Reload</li>
+            <li>Rich Widget Library</li>
+            <li>High Performance</li>
+            <li>Beautiful UI</li>
+          </ul>
+        `,
+
+        q3: `
+          <h2>3. What is Dart?</h2>
+          <p>Dart is an open-source, object-oriented programming language used in Flutter.</p>
+        `,
+
+        q4: `
+          <h2>4. Advantages of Flutter</h2>
+          <ul>
+            <li>Cross-platform support</li>
+            <li>Fast development</li>
+            <li>Open source</li>
+            <li>High performance</li>
+          </ul>
+        `,
+
+        q5: `
+          <h2>5. Android Studio in Flutter</h2>
+          <p>Android Studio is an IDE used to develop, run, and debug Flutter applications.</p>
+        `,
+
+        q6: `
+          <h2>6. Installing Flutter</h2>
+          <ol>
+            <li>Download Flutter SDK</li>
+            <li>Set environment path</li>
+            <li>Run flutter doctor</li>
+            <li>Create sample project</li>
+          </ol>
+        `,
+
+        q7: `
+          <h2>7. Flutter vs React Native</h2>
+          <p>Flutter uses Dart and native compilation, while React Native uses JavaScript and a bridge.</p>
+        `,
+
+        q8: `
+          <h2>8. Web vs Mobile Applications</h2>
+          <p>Web apps run in browsers, while mobile apps are installed from app stores.</p>
+        `,
+
+        q9: `
+          <h2>9. Emulator vs Simulator</h2>
+          <p>Emulators simulate full hardware, while simulators provide lightweight environments.</p>
+        `,
+
+        q10: `
+          <h2>10. Flutter Development Tools</h2>
+          <ul>
+            <li>Flutter SDK</li>
+            <li>Android Studio / VS Code</li>
+            <li>Flutter DevTools</li>
+            <li>Firebase</li>
+          </ul>
+        `,
+
+        ch2_unix: `
+  <h2>Chapter 2 – Flutter Installation on Unix / Linux</h2>
+  <p><b>Aim:</b> To install Flutter on a Unix/Linux system and execute sample Dart programs.</p>
+
+  <p><b>Installation Steps:</b></p>
+  <ol>
+    <li>Download Flutter SDK from <b>flutter.dev</b></li>
+    <li>Extract the SDK using <code>tar xf flutter_linux_*.tar.xz</code></li>
+    <li>Add <code>flutter/bin</code> to PATH</li>
+    <li>Run <code>flutter doctor</code></li>
+  </ol>
+
+  <h3>Program 1: Hello Dart Program</h3>
+  <pre>
+void main() {
+  print('Hello Flutter');
+}
+  </pre>
+  <p><b>Output:</b></p>
+  <img src="images/ch2_unix_hello.png" class="output-img" alt="Unix Hello Output" />
+
+  <h3>Program 2: Dart Variables and Control Statements</h3>
+  <pre>
+void main() {
+  int age=20; 
+  double height=5.6; 
+String name='Ram'; 
+bool isStudent=true; 
+print('Name:$name'); 
+print('Age:$age'); 
+print('Height:$height'); 
+print('Is a Student:$isStudent'); 
+if(age>18) 
+{ 
+print('$name is an adult.'); 
+} 
+else{ 
+print('$name is a minor.'); 
+} 
+print('counting from 1 to 5:'); 
+for(int i=1;i<=5;i++){ 
+print(i); 
+} 
+greet(name); 
+} 
+void greet(String personName) 
+{ 
+print('Hello,$personName!,WELCOME.'); 
+} 
+  </pre>
+  <p><b>Output:</b></p>
+  <img src="images/ch2_unix_control.png" class="output-img" alt="Unix Control Output" />
+`,
+        ch2_windows: `
+  <h2>Chapter 2 – Flutter Installation on Windows</h2>
+  <p><b>Aim:</b> To install Flutter on Windows OS and execute sample Dart programs.</p>
+
+  <p><b>Installation Steps:</b></p>
+  <ol>
+    <li>Download Flutter SDK (ZIP) from <b>flutter.dev</b></li>
+    <li>Extract the SDK to <code>C:\flutter</code></li>
+    <li>Add <code>C:\flutter\bin</code> to Environment Variables</li>
+    <li>Run <code>flutter doctor</code> in Command Prompt</li>
+  </ol>
+
+  <h3>Program 1: Hello Dart Program</h3>
+  <pre>
+void main() {
+  print('Hello Flutter on Windows');
+}
+  </pre>
+  
+  <h3>Program 2: Dart Conditional Example</h3>
+  <pre>
+void main() {
+  int marks = 75;
+
+  if (marks >= 40) {
+    print('Pass');
+  } else {
+    print('Fail');
+  }
+}
+  </pre>
+`,
+        ch3_linux: `
+  <h2>Chapter 3 – Android Studio Installation on Linux</h2>
+  <p><b>Aim:</b> To install Android Studio on a Linux-based operating system.</p>
+
+  <p><b>System Requirements:</b></p>
+  <ul>
+    <li>64-bit Linux distribution (Ubuntu 20.04 or later recommended)</li>
+    <li>Minimum 4 GB RAM</li>
+    <li>At least 8 GB free disk space</li>
+    <li>Java Development Kit (JDK)</li>
+  </ul>
+
+  <p><b>Installation Steps:</b></p>
+  <ol>
+    <li>Open terminal and update packages using <code>sudo apt update</code></li>
+    <li>Install JDK using <code>sudo apt install openjdk-17-jdk</code></li>
+    <li>Download Android Studio (tar.gz) from <b>developer.android.com</b></li>
+    <li>Extract the downloaded archive</li>
+    <li>Move extracted folder to <code>/opt</code> directory</li>
+    <li>Navigate to <code>/opt/android-studio/bin</code></li>
+    <li>Run Android Studio using <code>./studio.sh</code></li>
+  </ol>
+
+  <p><b>Post Installation:</b> Install Flutter and Dart plugins from Plugins section.</p>
+`,
+        ch3_windows: `
+  <h2>Chapter 3 – Android Studio Installation on Windows</h2>
+  <p><b>Aim:</b> To install Android Studio on Windows operating system.</p>
+
+  <p><b>System Requirements:</b></p>
+  <ul>
+    <li>Windows 10 or later (64-bit)</li>
+    <li>Minimum 8 GB RAM (4 GB minimum)</li>
+    <li>At least 8 GB free disk space</li>
+    <li>Internet connection</li>
+  </ul>
+
+  <p><b>Installation Steps:</b></p>
+  <ol>
+    <li>Open a web browser and visit <b>developer.android.com</b></li>
+    <li>Download Android Studio installer (.exe)</li>
+    <li>Double-click the installer to start installation</li>
+    <li>Select <b>Standard Installation</b> when prompted</li>
+    <li>Ensure Android SDK, Android SDK Platform-Tools, and AVD are selected</li>
+    <li>Choose installation location and proceed</li>
+    <li>Complete installation and launch Android Studio</li>
+    <li>Follow setup wizard to download SDK components</li>
+    <li>Go to File → Settings → Plugins</li>
+    <li>Install <b>Flutter</b> plugin (Dart installs automatically)</li>
+    <li>Restart Android Studio</li>
+  </ol>
+
+  <p><b>Result:</b> Android Studio installed successfully on Windows.</p>
+`,
+        ch4_text_container: `
+  <h2>Chapter 4 – Text Container</h2>
+  <p><b>Aim:</b> To demonstrate the use of Container widget with Text widget in Flutter.</p>
+
+  <p><b>Description:</b> The <b>Container</b> widget in Flutter is a versatile widget that allows you to apply padding, margin, background color, borders, and alignment to its child. When used with a <b>Text</b> widget, it helps in styling and positioning text effectively.</p>
+
+  <p><b>Steps:</b></p>
+  <ol>
+    <li>Create a new Flutter project.</li>
+    <li>Open the <code>lib/main.dart</code> file.</li>
+    <li>Use a <code>Container</code> widget with a <code>Text</code> widget as its child.</li>
+    <li>Apply padding, color, and text style.</li>
+  </ol>
+
+  <h3>Program: Text Container</h3>
+  <pre>
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Text Container Example')),
+        body: Center(
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            margin: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.lightBlueAccent,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.blue, width: 2),
+            ),
+            child: const Text(
+              'Welcome to Flutter',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+  </pre>
+
+  <p><b>Output:</b> A styled text displayed inside a colored container.</p>
+  <img src="images/ch4_unix_text.png" class="output-img" alt="Text Container Output" />
+`,
+        ch4_image_container: `
+  <h2>Chapter 4 – Image Container</h2>
+  <p><b>Aim:</b> To display an image inside a Container widget in Flutter.</p>
+
+  <p><b>Description:</b> The <b>Image</b> widget is used to display images in Flutter. When wrapped inside a <b>Container</b>, it allows applying padding, borders, background color, and rounded corners to images.</p>
+
+  <p><b>Steps:</b></p>
+  <ol>
+    <li>Create a Flutter project.</li>
+    <li>Open <code>lib/main.dart</code>.</li>
+    <li>Use <code>Image.network</code> inside a <code>Container</code>.</li>
+    <li>Apply border and padding to the container.</li>
+  </ol>
+
+  <h3>Program: Image Container</h3>
+  <pre>
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Image Container Example')),
+        body: Center(
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.blue, width: 3),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Image.network(
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+              width: 200,
+              height: 200,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+  </pre>
+
+  <p><b>Output:</b> An image displayed inside a bordered container.</p>
+  <img src="images/ch4_img_cont.png" class="output-img" alt="Image Container Output" />
+`,
+        ch5_row: `
+  <h2>Chapter 5 – Row Widget</h2>
+  <p><b>Aim:</b> To demonstrate the Row widget in Flutter.</p>
+  <p><b>Description:</b> The Row widget is used to arrange widgets horizontally in a single line.</p>
+
+  <h3>Program: Row Widget</h3>
+  <pre>
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Row Widget Example')),
+        body: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: const [
+              Icon(Icons.home, size: 50, color: Colors.blue),
+              Icon(Icons.star, size: 50, color: Colors.orange),
+              Icon(Icons.settings, size: 50, color: Colors.green),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+  </pre>
+  <p><b>Output:</b></p>
+  <img src="images/ch5_row.png" class="output-img" alt="Image Container Output" />
+
+`,
+        ch5_column: `
+  <h2>Chapter 5 – Column Widget</h2>
+  <p><b>Aim:</b> To demonstrate the Column widget in Flutter.</p>
+  <p><b>Description:</b> The Column widget is used to arrange widgets vertically.</p>
+
+  <h3>Program: Column Widget</h3>
+  <pre>
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Column Widget Example')),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: const [
+              Text('Flutter', style: TextStyle(fontSize: 24)),
+              ElevatedButton(onPressed: null, child: Text('Button')),
+              Icon(Icons.thumb_up, size: 50, color: Colors.purple),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+  </pre>
+  <p><b>Output:</b></p>
+  <img src="images/ch5_col_cont.png" class="output-img" alt="Image Container Output" />
+`,
+        ch5_stack: `
+  <h2>Chapter 5 – Stack Widget</h2>
+  <p><b>Aim:</b> To demonstrate the Stack widget in Flutter.</p>
+  <p><b>Description:</b> The Stack widget allows widgets to be placed on top of each other.</p>
+
+  <h3>Program: Stack Widget</h3>
+  <pre>
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Stack Widget Example')),
+        body: Center(
+          child: Stack(
+            alignment: Alignment.center,
+            children: const [
+              SizedBox(width: 200, height: 200, child: ColoredBox(color: Colors.blue)),
+              SizedBox(width: 150, height: 150, child: ColoredBox(color: Colors.red)),
+              SizedBox(width: 100, height: 100, child: ColoredBox(color: Colors.green)),
+              Text('Stack', style: TextStyle(color: Colors.white, fontSize: 20)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+  </pre>
+  <p><b>Output:</b></p>
+  <img src="images/ch5_stack.png" class="output-img" alt="Image Container Output" />
+`,
+        ch5_combined: `
+  <h2>Chapter 5 – Combination of Row, Column and Stack</h2>
+  <p><b>Aim:</b> To demonstrate the combined usage of Row, Column and Stack widgets.</p>
+
+  <h3>Program: Combined Layout</h3>
+  <pre>
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Combined Layout Example')),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: const [
+                  Icon(Icons.home),
+                  Icon(Icons.star),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Stack(
+                alignment: Alignment.center,
+                children: const [
+                  SizedBox(width: 120, height: 120, child: ColoredBox(color: Colors.blue)),
+                  Text('Stack'),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+  </pre>
+  <p><b>Output:</b></p>
+  <img src="images/ch5_combined.png" class="output-img" alt="Image Container Output" />
+`,
+
+ch6_reusable: `
+  <h2>Chapter 6 – Reusable Custom Widget</h2>
+  <p><b>Aim:</b> To create reusable custom widgets for common UI components.</p>
+
+  <p><b>Description:</b> Reusable widgets help reduce code duplication and improve maintainability. A custom widget can be created by extending <code>StatelessWidget</code> or <code>StatefulWidget</code>.</p>
+
+  <h3>Program: Reusable Button Widget</h3>
+  <pre>
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(home: HomeScreen());
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onPressed;
+
+  const CustomButton({super.key, required this.text, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Text(text),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Simple Reusable Widget')),
+      body: Center(
+        child: CustomButton(
+          text: 'Click Me',
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Button Pressed!')),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+  </pre>
+
+  <p><b>Output:</b></p>
+  <img src="images/ch6_reusable_output.png" class="output-img" alt="Reusable Widget Output" />
+`,
+
+ch6_theme: `
+  <h2>Chapter 6 – App-wide Custom Styling & Themes</h2>
+  <p><b>Aim:</b> To apply consistent styling across the application using themes.</p>
+
+  <p><b>Description:</b> Flutter provides the <code>ThemeData</code> class to define colors, fonts, and widget styles globally across the app.</p>
+
+  <h3>Program: App Theme Example</h3>
+  <pre>
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Theme Example',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.grey[200],
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          bodyMedium: TextStyle(fontSize: 16, color: Colors.black87),
+        ),
+      ),
+      home: HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('App Theme Demo')),
+      body: Center(
+        child: Text('Hello Flutter!', style: Theme.of(context).textTheme.bodyLarge),
+      ),
+    );
+  }
+}
+  </pre>
+
+  <p><b>Output:</b></p>
+  <img src="images/ch6_theme_output.png" class="output-img" alt="Theme Output" />
+`,
+
+ch7_fields: `
+  <h2>Chapter 7 – Form Fields</h2>
+  <p><b>Aim:</b> To design a form using different form fields in Flutter.</p>
+
+  <p><b>Common Form Fields:</b></p>
+  <ul>
+    <li><b>TextFormField</b> – accepts text input</li>
+    <li><b>DropdownButtonFormField</b> – selects a value from dropdown</li>
+    <li><b>Checkbox</b> – accepts boolean input</li>
+    <li><b>ElevatedButton</b> – submits the form</li>
+  </ul>
+
+  <h3>Program: Form with Input Fields</h3>
+  <pre>
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: const FormScreen(),
+    );
+  }
+}
+
+class FormScreen extends StatefulWidget {
+  const FormScreen({super.key});
+
+  @override
+  State<FormScreen> createState() => _FormScreenState();
+}
+
+class _FormScreenState extends State<FormScreen> {
+  final _formKey = GlobalKey<FormState>();
+  String name = '';
+  String email = '';
+  bool accepted = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('User Form')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Name'),
+              ),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Email'),
+              ),
+              CheckboxListTile(
+                title: const Text('Accept Terms'),
+                value: accepted,
+                onChanged: (v) => setState(() => accepted = v!),
+              ),
+              ElevatedButton(onPressed: () {}, child: const Text('Submit'))
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+  </pre>
+
+  <p><b>Output:</b></p>
+  <img src="images/ch7_fields_output.png" class="output-img" alt="Form Fields Output" />
+`,
+
+ch7_validation: `
+  <h2>Chapter 7 – Form Validation</h2>
+  <p><b>Aim:</b> To validate user input in a Flutter form and display appropriate error messages.</p>
+
+  <p><b>Description:</b> Form validation ensures that the data entered by the user meets certain rules before submission. Flutter provides validation through the <code>Form</code> and <code>TextFormField</code> widgets using validator functions.</p>
+
+  <p><b>Validation Rules Used:</b></p>
+  <ul>
+    <li>Name should not be empty</li>
+    <li>Email should contain '@'</li>
+    <li>User must accept terms and conditions</li>
+  </ul>
+
+  <h3>Program: Form Validation Example</h3>
+  <pre>
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: const ValidationForm(),
+    );
+  }
+}
+
+class ValidationForm extends StatefulWidget {
+  const ValidationForm({super.key});
+
+  @override
+  State<ValidationForm> createState() => _ValidationFormState();
+}
+
+class _ValidationFormState extends State<ValidationForm> {
+  final _formKey = GlobalKey<FormState>();
+  bool accepted = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Form Validation')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Name'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Name is required';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Email'),
+                validator: (value) {
+                  if (value == null || !value.contains('@')) {
+                    return 'Enter a valid email';
+                  }
+                  return null;
+                },
+              ),
+              CheckboxListTile(
+                title: const Text('Accept Terms and Conditions'),
+                value: accepted,
+                onChanged: (v) => setState(() => accepted = v!),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate() && accepted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Form Submitted Successfully')),
+                    );
+                  } else if (!accepted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Please accept terms')),
+                    );
+                  }
+                },
+                child: const Text('Submit'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+  </pre>
+
+  <p><b>Output:</b></p>
+  <img src="images/ch7_validation_output.png" class="output-img" alt="Form Validation Output" />
+`,
+
+ch8_animations: `
+  <h2>Chapter 8 – Animations</h2>
+  <p><b>Aim:</b> To demonstrate animation widgets in Flutter.</p>
+
+  <p><b>Description:</b> Flutter provides implicit animation widgets such as <b>AnimatedContainer</b>, <b>AnimatedOpacity</b>, and <b>AnimatedPositioned</b> which automatically animate changes in widget properties.</p>
+
+  <h3>Program: Animation Demo using AnimatedContainer</h3>
+  <pre>
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: AnimationDemo(),
+    );
+  }
+}
+
+class AnimationDemo extends StatefulWidget {
+  const AnimationDemo({super.key});
+
+  @override
+  State<AnimationDemo> createState() => _AnimationDemoState();
+}
+
+class _AnimationDemoState extends State<AnimationDemo> {
+  bool selected = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Animation Demo')),
+      body: Center(
+        child: GestureDetector(
+          onTap: () {
+            setState(() {
+              selected = !selected;
+            });
+          },
+          child: AnimatedContainer(
+            width: selected ? 200.0 : 100.0,
+            height: selected ? 100.0 : 200.0,
+            color: selected ? Colors.blue : Colors.red,
+            alignment: selected ? Alignment.center : Alignment.topCenter,
+            duration: const Duration(seconds: 1),
+            curve: Curves.fastOutSlowIn,
+            child: const Text(
+              'Tap Me',
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+  </pre>
+
+  <p><b>Output:</b></p>
+  <img src="images/ch8_animation_output.png" class="output-img" alt="Animation Output" />
+`,
+
+ch9_login: `
+  <h2>Chapter 9 – Login Page Design</h2>
+  <p><b>Aim:</b> Create a simple login screen with validations.</p>
+
+  <p><b>Widgets Used:</b> TextField, ElevatedButton, Column, Container</p>
+
+  <h3>Program: Login Page</h3>
+  <pre>
+import 'package:flutter/material.dart';
+void main() {
+ runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
+ @override
+ Widget build(BuildContext context) {
+ return MaterialApp(
+ title: 'Simple Login Page',
+ home: LoginPage(),
+ debugShowCheckedModeBanner: false,
+ );
+ }
+}
+class LoginPage extends StatefulWidget {
+ @override
+ State<LoginPage> createState() => _LoginPageState();
+}
+class _LoginPageState extends State<LoginPage> {
+ final _emailController = TextEditingController();
+ final _passwordController = TextEditingController();
+ String? _errorMessage;
+ void _login() {
+ setState(() { _errorMessage = null; });
+ final email = _emailController.text.trim();
+ final password = _passwordController.text.trim();
+ if (email.isEmpty || password.isEmpty) {
+ _errorMessage = 'Please enter both email and password';
+ } else if (!email.contains('@')) {
+ _errorMessage = 'Please enter a valid email address';
+ } else if (password.length < 8) {
+ _errorMessage = 'Password must be at least 8 characters long';
+ } else {
+ ScaffoldMessenger.of(context).showSnackBar(
+ SnackBar(content: Text('Login Successful!')),
+ );
+ }
+ }
+ @override
+ Widget build(BuildContext context) {
+ return Scaffold(
+ backgroundColor: Colors.blue[50],
+ body: Center(
+ child: Container(
+ padding: EdgeInsets.all(20),
+ width: 320,
+ decoration: BoxDecoration(
+ color: Colors.white,
+ borderRadius: BorderRadius.circular(16),
+ boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8)],
+ ),
+ child: Column(
+ mainAxisSize: MainAxisSize.min,
+ children: [
+ Text('Login', style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
+ SizedBox(height: 20),
+ TextField(controller: _emailController, decoration: InputDecoration(labelText: 'Email')),
+ SizedBox(height: 16),
+ TextField(controller: _passwordController, decoration: InputDecoration(labelText: 'Password'), obscureText: true),
+ SizedBox(height: 16),
+ if (_errorMessage != null) Text(_errorMessage!, style: TextStyle(color: Colors.red)),
+ SizedBox(height: 16),
+ ElevatedButton(onPressed: _login, child: Text('Login')),
+ ],
+ ),
+ ),
+ ),
+ );
+ }
+}
+  </pre>
+
+  <p><b>Output:</b></p>
+  <img src="images/ch9_login_output.png" class="output-img" />
+`,
+
+ch9_profile: `
+  <h2>Chapter 9 – Profile Card Design</h2>
+  <p><b>Aim:</b> Design a user profile card.</p>
+
+  <p><b>Widgets Used:</b> Card, CircleAvatar, Row, Column</p>
+
+  <h3>Program: Profile Card</h3>
+  <pre>
+import 'package:flutter/material.dart';
+void main() {
+ runApp(ProfileApp());
+}
+class ProfileApp extends StatelessWidget {
+ @override
+ Widget build(BuildContext context) {
+ return MaterialApp(
+ debugShowCheckedModeBanner: false,
+ home: Scaffold(
+ backgroundColor: Colors.blueGrey[50],
+ body: Center(child: ProfileCard()),
+ ),
+ );
+ }
+}
+class ProfileCard extends StatelessWidget {
+ @override
+ Widget build(BuildContext context) {
+ return Card(
+ elevation: 6,
+ shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+ margin: EdgeInsets.all(20),
+ child: Padding(
+ padding: EdgeInsets.all(20),
+ child: Column(mainAxisSize: MainAxisSize.min, children: [
+ Row(children: [
+ CircleAvatar(radius: 40, child: Icon(Icons.person, size: 40)),
+ SizedBox(width: 20),
+ Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+ Text('Pavani', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+ Text('pavani@gmail.com'),
+ ]),
+ ]),
+ ]),
+ ),
+ );
+ }
+}
+  </pre>
+
+  <p><b>Output:</b></p>
+  <img src="images/ch9_profile_output.png" class="output-img" />
+`,
+ch9_allwidgets: `
+  <h2>Chapter 9 – All Widgets Program</h2>
+  <p><b>Aim:</b> Demonstrate usage of multiple Flutter widgets.</p>
+
+  <h3>Program: All Widgets</h3>
+  <pre>
+import 'package:flutter/material.dart';
+void main() {
+  runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('All Widgets')),
+        body: Column(
+          children: [
+            Text('Flutter Widgets Demo'),
+            Icon(Icons.star, size: 50),
+            ElevatedButton(onPressed: () {}, child: Text('Button')),
+          ],
+        ),
+      ),
+    );
+  }
+}
+  </pre>
+  <p><b>Output:</b></p>
+  <img src="images/ch9_allwidgets_output.png" class="output-img" />
+`,
+ch10_api: `
+          <h2>Chapter 10 – REST API Integration</h2>
+          <p><b>Aim:</b> To fetch data from a REST API.</p>
+          <h3>Program: API Demo</h3>
+          <pre>
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(home: ApiDemo());
+  }
+}
+
+class ApiDemo extends StatefulWidget {
+  @override
+  State<ApiDemo> createState() => _ApiDemoState();
+}
+
+class _ApiDemoState extends State<ApiDemo> {
+  String title = 'Loading...';
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    final res = await http.get(
+      Uri.parse('https://jsonplaceholder.typicode.com/posts/1'),
+    );
+    final data = jsonDecode(res.body);
+    setState(() {
+      title = data['title'];
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('API Example')),
+      body: Center(child: Text(title)),
+    );
+  }
+}
+          </pre>
+          <p><b>Output:</b></p>
+          <img src="images/ch10_api_output.png" class="output-img" />
+        `
+,ch11_bottom: `
+          <h2>Chapter 11 – Bottom Navigation Bar</h2>
+          <p><b>Aim:</b> To create persistent navigation using BottomNavigationBar for multi-screen apps.</p>
+
+          <p><b>Description:</b> BottomNavigationBar allows switching between multiple views without losing state. Use an IndexedStack or separate pages with a stateful widget.</p>
+
+          <h3>Program: Bottom Navigation Bar</h3>
+          <pre>
+import 'package:flutter/material.dart';
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(home: FirstScreen());
+  }
+}
+
+class FirstScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('First Screen')),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () async {
+            final result = await Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SecondScreen()),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Returned: \$result')),
+            );
+          },
+          child: Text('Go to Second Screen'),
+        ),
+      ),
+    );
+  }
+}
+
+class SecondScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+    appBar: AppBar(title: Text('Details')),
+      body: Center(child: Text('Received: \$args')),
+    );
+  }
+}
+          </pre>
+
+          <p><b>Output:</b> (Home screen → navigates to Details with passed argument)</p>
+          <img src="images/ch11_named_output.png" class="output-img" alt="Named Routes Output" />
+        `,
+        ch11_basic: `
+  <h2>Chapter 11 – Basic Navigation (Navigator.push / pop)</h2>
+  <p><b>Aim:</b> To demonstrate screen navigation in Flutter using Navigator.push() to go to a new screen and Navigator.pop() to return, with optional data passing.</p>
+
+  <p><b>Description:</b> 
+    The Navigator manages a stack of screens (routes). 
+    <ul>
+      <li><code>Navigator.push()</code> adds a new screen to the stack.</li>
+      <li><code>Navigator.pop()</code> removes the top screen and returns to the previous one.</li>
+      <li>Data can be passed back from the second screen using <code>pop(context, data)</code>.</li>
+    </ul>
+  </p>
+
+  <h3>Program: Basic Navigation Demo</h3>
+  <pre>
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Basic Navigation',
+      debugShowCheckedModeBanner: false,
+      home: const FirstScreen(),
+    );
+  }
+}
+
+class FirstScreen extends StatelessWidget {
+  const FirstScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Home Screen'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () async {
+            final result = await Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SecondScreen()),
+            );
+
+            if (result != null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Returned: $result')),
+              );
+            }
+          },
+          child: const Text('Go to Second Screen'),
+        ),
+      ),
+    );
+  }
+}
+
+class SecondScreen extends StatelessWidget {
+  const SecondScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Second Screen'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context, 'Hello from Second Screen!');
+          },
+          child: const Text('Go Back'),
+        ),
+      ),
+    );
+  }
+}
+  </pre>
+
+  <p><b>Output:</b></p>
+  <img src="images/ch11_basic_output.png" class="output-img" alt="Basic Navigation - Home Screen" />
+  <p><i>First Screen → Tap button → Second Screen → Tap "Go Back" or use AppBar back arrow → Returns to First Screen with optional message.</i></p>
+`
+      };
+
+      content.innerHTML = data[topic] || '<p>Content not found.</p>';
+    }
+  </script>
+
+</body>
+</html>
